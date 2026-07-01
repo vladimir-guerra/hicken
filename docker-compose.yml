@@ -8,6 +8,8 @@ services:
       - '80:80'
       - '81:81'
       - '443:443'
+    security_opt:
+      - seccomp:uncofined
     volumes:
       - ./npm/data:/data
       - ./npm/letsencrypt:/etc/letsencrypt
@@ -15,7 +17,7 @@ services:
       - campus
 
   pihole:
-    image: pihole/pihole:latest
+    image: pihole/pihole:v5.8.1
     restart: always
     ports:
       - "53:53/tcp"
