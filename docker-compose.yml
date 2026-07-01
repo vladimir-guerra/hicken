@@ -9,7 +9,7 @@ services:
       - '81:81'
       - '443:443'
     security_opt:
-      - seccomp:uncofined
+      - seccomp:unconfined
     volumes:
       - ./npm/data:/data
       - ./npm/letsencrypt:/etc/letsencrypt
