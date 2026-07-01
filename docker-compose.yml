@@ -9,8 +9,6 @@ services:
     volumes:
       - ./npm/data:/data
       - ./npm/letsencrypt:/etc/letsencrypt
-    networks:
-      - campus
 
   pihole:
     image: pihole/pihole:latest
@@ -31,7 +29,3 @@ services:
       - NET_ADMIN
     networks:
       - campus
-
-networks:
-  campus:
-    driver: bridge
