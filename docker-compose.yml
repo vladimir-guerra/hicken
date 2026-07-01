@@ -1,36 +1,36 @@
 services:
-  nginx-proxy-manager:
-    image: 'jc21/nginx-proxy-manager:latest'
-    restart: always
-    ports:
-      - '80:80'
-      - '81:81'
-      - '443:443'
-    volumes:
-      - ./npm/data:/data
-      - ./npm/letsencrypt:/etc/letsencrypt
-    networks:
-      -  campus # Conectamos a la misma red para que NPM pueda hablar con Pi-hole
+  nginx-proxy-manager:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: always
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - ./npm/data:/data
+      - ./npm/letsencrypt:/etc/letsencrypt
+    networks:
+      - campus
 
-  pihole:
-    image: pihole/pihole:latest
-    restart: always
-    ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "67:67/udp"
-      - "8080:80"
-    environment:
-      TZ: 'America/Argentina/Buenos_Aires'
-      WEBPASSWORD: 'hicken'
-      DNSMASQ_LISTENING: 'all'
-    volumes:
-      - './pihole/etc-pihole:/etc/pihole'
-      - './pihole/etc-dnsmasq.d:/etc/dnsmasq.d'
-    cap_add:
-      - NET_ADMIN
-    networks:
-      campus
+  pihole:
+    image: pihole/pihole:latest
+    restart: always
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+      - "8080:80"
+    environment:
+      TZ: 'America/Argentina/Buenos_Aires'
+      WEBPASSWORD: 'hicken'
+      DNSMASQ_LISTENING: 'all'
+    volumes:
+      - './pihole/etc-pihole:/etc/pihole'
+      - './pihole/etc-dnsmasq.d:/etc/dnsmasq.d'
+    cap_add:
+      - NET_ADMIN
+    networks:
+      - campus
 
 networks:
-  - campus
+  campus:
