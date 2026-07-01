@@ -21,7 +21,7 @@ services:
       - "53:53/tcp"
       - "53:53/udp"
       - "67:67/udp"
-      - "8080:80"
+      - "8081:80"
     environment:
       TZ: 'America/Argentina/Buenos_Aires'
       WEBPASSWORD: 'hicken'
